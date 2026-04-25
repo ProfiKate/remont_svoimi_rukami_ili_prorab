@@ -6,41 +6,74 @@
 <title>Ремонт: делать самому или нанять прораба?</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a1a; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; }
-  .wrap { max-width: 560px; width: 100%; background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
-  .header { margin-bottom: 1.5rem; }
-  .header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-  .logo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-  .header h1 { font-size: 18px; font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
-  .header p { font-size: 13px; color: #888; }
-  .progress-wrap { height: 4px; background: #eee; border-radius: 4px; margin-bottom: 1.5rem; }
-  .progress-bar { height: 4px; border-radius: 4px; background: #378ADD; transition: width 0.3s; }
-  .q-num { font-size: 12px; color: #aaa; margin-bottom: 4px; }
-  .q-text { font-size: 15px; font-weight: 500; line-height: 1.5; margin-bottom: 12px; }
-  .opt-btn { display: block; width: 100%; text-align: left; padding: 10px 14px; margin-bottom: 8px; border-radius: 10px; border: 1px solid #e5e5e5; background: #fff; color: #1a1a1a; cursor: pointer; font-size: 14px; line-height: 1.5; transition: background 0.15s, border-color 0.15s; }
-  .opt-btn:hover { background: #f5f5f3; }
-  .opt-btn.selected { border: 1.5px solid #378ADD; background: #EBF4FC; color: #0C447C; }
-  .nav-row { display: flex; gap: 10px; margin-top: 1.5rem; }
-  .nav-btn { flex: 1; padding: 11px; border-radius: 10px; border: 1px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; font-size: 14px; font-weight: 500; transition: background 0.15s; }
-  .nav-btn:hover { background: #f5f5f3; }
-  .nav-btn.primary { background: #378ADD; color: #fff; border-color: #378ADD; }
-  .nav-btn.primary:hover { background: #185FA5; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0EDE8; color: #1a1a1a; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; }
+  .wrap { max-width: 560px; width: 100%; }
+
+  /* Header */
+  .header { background: #fff; border-radius: 16px; padding: 1.5rem; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .header-top { display: flex; align-items: center; gap: 14px; }
+  .logo { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid #F0EDE8; }
+  .header h1 { font-size: 17px; font-weight: 600; line-height: 1.4; margin-bottom: 3px; }
+  .header p { font-size: 12px; color: #999; line-height: 1.5; }
+
+  /* Progress */
+  .progress-wrap { height: 5px; background: #E0DBD4; border-radius: 5px; margin-bottom: 12px; }
+  .progress-bar { height: 5px; border-radius: 5px; background: linear-gradient(90deg, #378ADD, #5BA8F5); transition: width 0.4s ease; }
+
+  /* Question card */
+  .q-card { background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .q-num { font-size: 11px; font-weight: 600; color: #378ADD; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .q-text { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 16px; color: #111; }
+
+  /* Options */
+  .opt-btn {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px;
+    border-radius: 12px; border: 1.5px solid #EEEBE6;
+    background: #FAFAF9; color: #333; cursor: pointer;
+    font-size: 14px; line-height: 1.5;
+    transition: all 0.15s ease;
+  }
+  .opt-btn:hover { background: #F5F2EE; border-color: #D8D2C8; }
+  .opt-btn.selected { border-color: #378ADD; background: #EBF4FC; color: #0C447C; }
+  .opt-btn.selected .opt-dot { background: #378ADD; border-color: #378ADD; }
+  .opt-btn.selected .opt-dot::after { opacity: 1; }
+  .opt-dot {
+    flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid #CCC; background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .opt-dot::after {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: #fff; opacity: 0; transition: opacity 0.15s;
+  }
+
+  /* Nav */
+  .nav-row { display: flex; gap: 10px; margin-top: 16px; }
+  .nav-btn { flex: 1; padding: 12px; border-radius: 12px; border: 1.5px solid #EEEBE6; background: #FAFAF9; color: #555; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.15s; }
+  .nav-btn:hover { background: #F0EDE8; }
+  .nav-btn.primary { background: linear-gradient(135deg, #378ADD, #185FA5); color: #fff; border-color: transparent; box-shadow: 0 3px 10px rgba(55,138,221,0.3); }
+  .nav-btn.primary:hover { background: linear-gradient(135deg, #2a78cc, #124e8a); }
   .nav-btn:disabled { opacity: 0.3; cursor: default; }
-  .result-icon { font-size: 40px; margin-bottom: 10px; }
-  .result-title { font-size: 22px; font-weight: 600; margin-bottom: 10px; }
-  .score-bar { display: flex; gap: 6px; margin-bottom: 10px; }
-  .score-seg { height: 6px; border-radius: 3px; background: #eee; }
+
+  /* Result */
+  .result-card { background: #fff; border-radius: 16px; padding: 1.75rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 12px; }
+  .result-icon { font-size: 44px; margin-bottom: 10px; }
+  .result-title { font-size: 24px; font-weight: 700; margin-bottom: 14px; color: #111; }
+  .score-bar { display: flex; gap: 5px; margin-bottom: 8px; height: 7px; border-radius: 5px; overflow: hidden; }
+  .score-seg { height: 7px; border-radius: 5px; background: #eee; }
   .score-seg.s { background: #1D9E75; }
   .score-seg.h { background: #EF9F27; }
   .score-seg.p { background: #378ADD; }
-  .score-legend { display: flex; gap: 16px; font-size: 12px; color: #888; margin-bottom: 14px; }
-  .result-desc { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 12px; }
-  .result-tip { font-size: 13px; color: #555; border-left: 2px solid #378ADD; padding-left: 10px; line-height: 1.6; margin-bottom: 14px; }
-  .insta-block { background: #f5f5f3; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #555; line-height: 1.6; }
-  .insta-block a { color: #378ADD; font-weight: 500; text-decoration: none; }
+  .score-legend { display: flex; gap: 16px; font-size: 12px; color: #999; margin-bottom: 18px; }
+  .result-desc { font-size: 14px; color: #444; line-height: 1.8; margin-bottom: 14px; }
+  .result-tip { font-size: 13px; color: #555; border-left: 3px solid #378ADD; padding: 8px 12px; background: #F0F7FF; border-radius: 0 8px 8px 0; line-height: 1.6; margin-bottom: 18px; }
+  .insta-block { background: #F0EDE8; border-radius: 12px; padding: 14px 16px; font-size: 13px; color: #666; line-height: 1.7; }
+  .insta-block a { color: #378ADD; font-weight: 600; text-decoration: none; }
   .insta-block a:hover { text-decoration: underline; }
-  .restart-btn { display: block; width: 100%; padding: 11px; border-radius: 10px; border: 1px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; font-size: 14px; font-weight: 500; margin-top: 12px; transition: background 0.15s; }
-  .restart-btn:hover { background: #f5f5f3; }
+  .restart-btn { display: block; width: 100%; padding: 13px; border-radius: 12px; border: 1.5px solid #EEEBE6; background: #fff; color: #555; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .restart-btn:hover { background: #F5F2EE; }
 </style>
 </head>
 <body>
@@ -166,14 +199,19 @@ function render() {
   document.getElementById("pbar").style.width = (cur / questions.length * 100) + "%";
   if (cur >= questions.length) { showResult(body); return; }
   const q = questions[cur];
-  let html = `<div class="q-num">Вопрос ${cur+1} из ${questions.length}</div><div class="q-text">${q.q}</div>`;
+  let html = `<div class="q-card">
+    <div class="q-num">Вопрос ${cur+1} из ${questions.length}</div>
+    <div class="q-text">${q.q}</div>`;
   q.opts.forEach((o, i) => {
-    html += `<button class="opt-btn${answers[cur]===i?" selected":""}" onclick="pick(${i})">${o[0]}</button>`;
+    const sel = answers[cur] === i ? " selected" : "";
+    html += `<button class="opt-btn${sel}" onclick="pick(${i})">
+      <span class="opt-dot"></span>${o[0]}
+    </button>`;
   });
   html += `<div class="nav-row">
     <button class="nav-btn" onclick="go(-1)"${cur===0?" disabled":""}>← Назад</button>
     <button class="nav-btn primary" onclick="go(1)"${answers[cur]===null?" disabled":""}>${cur===questions.length-1?"Узнать результат →":"Дальше →"}</button>
-  </div>`;
+  </div></div>`;
   body.innerHTML = html;
 }
 
@@ -184,21 +222,22 @@ function showResult(body) {
   let s=0,h=0,p=0;
   answers.forEach((a,qi) => { if(a!==null){s+=questions[qi].opts[a][1];h+=questions[qi].opts[a][2];p+=questions[qi].opts[a][3];} });
   const r = (s>=h&&s>=p) ? results[0] : (h>=p) ? results[1] : results[2];
-  const tot = Math.max(s+h+p, 1);
   const seg = (n, t) => `<div class="score-seg${r.type===t?" "+t:""}" style="flex:${Math.max(n,1)}"></div>`;
   document.getElementById("pbar").style.width = "100%";
   body.innerHTML = `
-    <div class="result-icon">${r.icon}</div>
-    <div class="result-title">${r.title}</div>
-    <div class="score-bar">${seg(s,"s")}${seg(h,"h")}${seg(p,"p")}</div>
-    <div class="score-legend">
-      <span style="color:#1D9E75">● Сам: ${s}</span>
-      <span style="color:#EF9F27">● Гибрид: ${h}</span>
-      <span style="color:#378ADD">● Прораб: ${p}</span>
+    <div class="result-card">
+      <div class="result-icon">${r.icon}</div>
+      <div class="result-title">${r.title}</div>
+      <div class="score-bar">${seg(s,"s")}${seg(h,"h")}${seg(p,"p")}</div>
+      <div class="score-legend">
+        <span style="color:#1D9E75">● Сам: ${s}</span>
+        <span style="color:#EF9F27">● Гибрид: ${h}</span>
+        <span style="color:#378ADD">● Прораб: ${p}</span>
+      </div>
+      <div class="result-desc">${r.desc}</div>
+      <div class="result-tip">${r.tip}</div>
+      <div class="insta-block">Больше лайфхаков, честных советов и проектных решений по ремонту — в Instagram: <a href="https://instagram.com/designproject_ks" target="_blank">@designproject_ks</a>. Подписывайся, чтобы не упустить полезное!</div>
     </div>
-    <div class="result-desc">${r.desc}</div>
-    <div class="result-tip">${r.tip}</div>
-    <div class="insta-block">Больше лайфхаков, честных советов и проектных решений по ремонту — в Instagram: <a href="https://instagram.com/designproject_ks" target="_blank">@designproject_ks</a>. Подписывайся, чтобы не упустить полезное!</div>
     <button class="restart-btn" onclick="restart()">Пройти тест заново</button>
   `;
 }
