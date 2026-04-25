@@ -9,6 +9,8 @@
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a1a; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; }
   .wrap { max-width: 560px; width: 100%; background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
   .header { margin-bottom: 1.5rem; }
+  .header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .logo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .header h1 { font-size: 18px; font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
   .header p { font-size: 13px; color: #888; }
   .progress-wrap { height: 4px; background: #eee; border-radius: 4px; margin-bottom: 1.5rem; }
@@ -44,8 +46,13 @@
 <body>
 <div class="wrap">
   <div class="header">
-    <h1>Делать ремонт самому или нанять прораба?</h1>
-    <p>15 вопросов — честный результат</p>
+    <div class="header-top">
+      <img class="logo" src="https://raw.githubusercontent.com/ProfiKateBA/remont_svoimi_rukami_ili_prorab/main/SK.png" alt="logo">
+      <div>
+        <h1>Делать ремонт самому или нанять прораба?</h1>
+        <p>15 вопросов — честный результат</p>
+      </div>
+    </div>
   </div>
   <div class="progress-wrap"><div class="progress-bar" id="pbar" style="width:0%"></div></div>
   <div id="quiz-body"></div>
