@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ремонт: делать самому или нанять прораба?</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a1a; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; }
+  .wrap { max-width: 560px; width: 100%; background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  .header { margin-bottom: 1.5rem; }
+  .header h1 { font-size: 18px; font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
+  .header p { font-size: 13px; color: #888; }
+  .progress-wrap { height: 4px; background: #eee; border-radius: 4px; margin-bottom: 1.5rem; }
+  .progress-bar { height: 4px; border-radius: 4px; background: #378ADD; transition: width 0.3s; }
+  .q-num { font-size: 12px; color: #aaa; margin-bottom: 4px; }
+  .q-text { font-size: 15px; font-weight: 500; line-height: 1.5; margin-bottom: 12px; }
+  .opt-btn { display: block; width: 100%; text-align: left; padding: 10px 14px; margin-bottom: 8px; border-radius: 10px; border: 1px solid #e5e5e5; background: #fff; color: #1a1a1a; cursor: pointer; font-size: 14px; line-height: 1.5; transition: background 0.15s, border-color 0.15s; }
+  .opt-btn:hover { background: #f5f5f3; }
+  .opt-btn.selected { border: 1.5px solid #378ADD; background: #EBF4FC; color: #0C447C; }
+  .nav-row { display: flex; gap: 10px; margin-top: 1.5rem; }
+  .nav-btn { flex: 1; padding: 11px; border-radius: 10px; border: 1px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; font-size: 14px; font-weight: 500; transition: background 0.15s; }
+  .nav-btn:hover { background: #f5f5f3; }
+  .nav-btn.primary { background: #378ADD; color: #fff; border-color: #378ADD; }
+  .nav-btn.primary:hover { background: #185FA5; }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .result-icon { font-size: 40px; margin-bottom: 10px; }
+  .result-title { font-size: 22px; font-weight: 600; margin-bottom: 10px; }
+  .score-bar { display: flex; gap: 6px; margin-bottom: 10px; }
+  .score-seg { height: 6px; border-radius: 3px; background: #eee; }
+  .score-seg.s { background: #1D9E75; }
+  .score-seg.h { background: #EF9F27; }
+  .score-seg.p { background: #378ADD; }
+  .score-legend { display: flex; gap: 16px; font-size: 12px; color: #888; margin-bottom: 14px; }
+  .result-desc { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+  .result-tip { font-size: 13px; color: #555; border-left: 2px solid #378ADD; padding-left: 10px; line-height: 1.6; margin-bottom: 14px; }
+  .insta-block { background: #f5f5f3; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #555; line-height: 1.6; }
+  .insta-block a { color: #378ADD; font-weight: 500; text-decoration: none; }
+  .insta-block a:hover { text-decoration: underline; }
+  .restart-btn { display: block; width: 100%; padding: 11px; border-radius: 10px; border: 1px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; font-size: 14px; font-weight: 500; margin-top: 12px; transition: background 0.15s; }
+  .restart-btn:hover { background: #f5f5f3; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <h1>Делать ремонт самому или нанять прораба?</h1>
+    <p>15 вопросов — честный результат</p>
+  </div>
+  <div class="progress-wrap"><div class="progress-bar" id="pbar" style="width:0%"></div></div>
+  <div id="quiz-body"></div>
+</div>
+
+<script>
+const questions = [
+  { q: "Какой у вас бюджет на ремонт?", opts: [
+    ["Минимальный — хочу сэкономить на всём: и на работах, и на материалах", 2,0,0],
+    ["Средний — готов платить за работы и нормальные материалы, но без лишних трат", 1,1,0],
+    ["Выше среднего — качество важнее экономии, готов платить профессионалам", 0,1,1],
+    ["Не ограничен — хочу результат без лишних хлопот", 0,0,2]
+  ]},
+  { q: "Сколько свободного времени у вас есть на ремонт?", opts: [
+    ["Много — могу уделять несколько часов каждый день", 2,0,0],
+    ["Немного — пара вечеров и выходные", 1,1,0],
+    ["Только выходные, и то не всегда", 0,1,1],
+    ["Почти нет — работа и дела занимают всё время", 0,0,2]
+  ]},
+  { q: "Что именно нужно сделать? Выберите ближайшее к вашей ситуации:", opts: [
+    ["Косметический ремонт: обои, покраска, замена плинтусов и мелочей", 2,0,0],
+    ["Замена полов, плитка в ванной, новые двери — без серьёзных вмешательств", 1,1,0],
+    ["Капитальный ремонт нескольких комнат, возможно частичная замена коммуникаций", 0,1,1],
+    ["Полный ремонт, перепланировка и/или полная замена электрики и труб", 0,0,2]
+  ]},
+  { q: "Есть ли у вас опыт в ремонтных работах?", opts: [
+    ["Да, делал ремонт раньше и справился", 2,0,0],
+    ["Немного — умею что-то простое", 1,1,0],
+    ["Теоретический: смотрел ролики, читал — но руками почти не делал", 0,1,1],
+    ["Нет совсем — даже гвоздь забить страшновато", 0,0,2]
+  ]},
+  { q: "Как вы относитесь к рискам и возможным ошибкам?", opts: [
+    ["Спокойно — ошибусь, переделаю, зато научусь", 2,0,0],
+    ["Допускаю небольшой риск, если цена ошибки невысокая", 1,1,0],
+    ["Хочу минимум рисков — готов контролировать, но ошибок не хочу", 0,1,1],
+    ["Совсем не готов — лучше сразу сделать правильно и заплатить за это", 0,0,2]
+  ]},
+  { q: "Готовы ли вы сами искать и координировать мастеров?", opts: [
+    ["Да, всё организую сам — мне не сложно", 2,0,0],
+    ["Могу найти узких специалистов под конкретные задачи, но не хочу быть прорабом", 1,1,0],
+    ["Предпочту, чтобы кто-то один взял на себя координацию всего процесса", 0,1,1],
+    ["Нет — не хочу тратить на это время и нервы вообще", 0,0,2]
+  ]},
+  { q: "Где вы будете находиться во время ремонта?", opts: [
+    ["Живу там же — буду видеть всё своими глазами каждый день", 2,0,0],
+    ["Живу в другом месте, но готов приезжать часто — несколько раз в неделю", 1,1,0],
+    ["Живу в другом месте, смогу заглядывать раз в неделю или реже", 0,1,1],
+    ["Бывать там почти не смогу — нужен кто-то, кто будет контролировать", 0,0,2]
+  ]},
+  { q: "Есть ли у вас доступ к инструментам?", opts: [
+    ["Да, есть всё нужное", 2,0,0],
+    ["Кое-что есть, остальное можно взять или купить", 1,1,0],
+    ["Только базовое — дрель, молоток, отвёртка", 0,1,1],
+    ["Почти ничего нет", 0,0,2]
+  ]},
+  { q: "Что для вас главный приоритет?", opts: [
+    ["Сэкономить деньги — даже если займёт больше времени и сил", 2,0,0],
+    ["Баланс: сэкономить там, где можно, и не мучиться там, где сложно", 1,1,0],
+    ["Качество результата при разумной цене", 0,1,1],
+    ["Сделать быстро и без головной боли — деньги не главное", 0,0,2]
+  ]},
+  { q: "Насколько сложный дизайн-проект вы планируете?", opts: [
+    ["Простой — стандартные решения, без особых изысков", 2,0,0],
+    ["Умеренный — несколько интересных элементов, продуманная цветовая схема", 1,1,0],
+    ["Продуманный — с нюансами, авторскими деталями и точным исполнением", 0,1,1],
+    ["Сложный — много нестандартного, важна точность реализации", 0,0,2]
+  ]},
+  { q: "Есть ли в квартире скрытые проблемы (старая проводка, трубы, кривые стены)?", opts: [
+    ["Нет, всё в хорошем состоянии", 2,0,0],
+    ["Есть мелкие нюансы, но некритично", 1,1,0],
+    ["Есть, и под часть из них нужны специалисты", 0,1,1],
+    ["Да, серьёзные — там без профессионалов не обойтись", 0,0,2]
+  ]},
+  { q: "Как вы относитесь к делегированию?", opts: [
+    ["Люблю всё контролировать и делать сам — так спокойнее", 2,0,0],
+    ["Могу доверить часть задач, за ключевыми этапами слежу сам", 1,1,0],
+    ["Готов доверить почти всё, если человек проверенный", 0,1,1],
+    ["Хочу отдать задачу целиком и просто получить результат", 0,0,2]
+  ]},
+  { q: "Есть ли у вас проверенные мастера в окружении?", opts: [
+    ["Есть — и я планирую делать ремонт с их помощью", 2,0,0],
+    ["Есть пара знакомых специалистов под конкретные задачи (плитка, электрика)", 1,1,0],
+    ["Нет проверенных, буду искать через отзывы и рекомендации", 0,1,1],
+    ["Нет, и искать самому не хочу — лучше отдать всё прорабу", 0,0,2]
+  ]},
+  { q: "Как вы воспринимаете процесс ремонта?", opts: [
+    ["С интересом — люблю делать что-то своими руками", 2,0,0],
+    ["Нормально — главное, чтобы шло по плану и без сюрпризов", 1,1,0],
+    ["Как неизбежное — хочу пережить побыстрее и с минимумом участия", 0,1,1],
+    ["С тревогой — для меня это стресс, хочу минимум вовлечённости", 0,0,2]
+  ]},
+  { q: "Насколько вы готовы разбираться в технических деталях (электрика, сантехника)?", opts: [
+    ["Мне интересно и я уже разбираюсь — могу сделать сам", 2,0,0],
+    ["Готов изучить основы, чтобы контролировать мастеров", 1,1,0],
+    ["Хочу понимать в общих чертах, детали пусть решают специалисты", 0,1,1],
+    ["Не хочу вникать вообще — это не моё", 0,0,2]
+  ]},
+];
+
+const results = [
+  { type:"s", icon:"🔨", title:"Делай сам!", desc:"У тебя есть всё, что нужно: время, опыт, желание и правильный настрой. Косметический и несложный ремонт — твоя территория. Ты сэкономишь деньги и получишь результат, которым будешь гордиться.", tip:"По электрике и сантехнике всё равно проконсультируйся со специалистом — это убережёт от дорогих ошибок." },
+  { type:"h", icon:"🤝", title:"Гибридный формат", desc:"Твоя оптимальная стратегия — часть работ берёшь на себя, сложные или специфические этапы отдаёшь узким специалистам. Так и бюджет сохранишь, и результат получишь надёжный.", tip:"Отделку и покраску — сам, электрику, сантехнику и стяжку — проверенным мастерам." },
+  { type:"p", icon:"👷", title:"Нужен прораб", desc:"Твой проект, ритм жизни или масштаб задач требуют профессионального управления. Прораб сэкономит время, нервы и убережёт от дорогостоящих ошибок. Твоя задача — чётко поставить задачу и контролировать результат.", tip:"Перед наймом проверь отзывы, портфолио и обязательно заключи договор с фиксированной сметой." },
+];
+
+let answers = new Array(questions.length).fill(null);
+let cur = 0;
+
+function render() {
+  const body = document.getElementById("quiz-body");
+  document.getElementById("pbar").style.width = (cur / questions.length * 100) + "%";
+  if (cur >= questions.length) { showResult(body); return; }
+  const q = questions[cur];
+  let html = `<div class="q-num">Вопрос ${cur+1} из ${questions.length}</div><div class="q-text">${q.q}</div>`;
+  q.opts.forEach((o, i) => {
+    html += `<button class="opt-btn${answers[cur]===i?" selected":""}" onclick="pick(${i})">${o[0]}</button>`;
+  });
+  html += `<div class="nav-row">
+    <button class="nav-btn" onclick="go(-1)"${cur===0?" disabled":""}>← Назад</button>
+    <button class="nav-btn primary" onclick="go(1)"${answers[cur]===null?" disabled":""}>${cur===questions.length-1?"Узнать результат →":"Дальше →"}</button>
+  </div>`;
+  body.innerHTML = html;
+}
+
+function pick(i) { answers[cur] = i; render(); }
+function go(d) { cur = Math.max(0, Math.min(questions.length, cur+d)); render(); }
+
+function showResult(body) {
+  let s=0,h=0,p=0;
+  answers.forEach((a,qi) => { if(a!==null){s+=questions[qi].opts[a][1];h+=questions[qi].opts[a][2];p+=questions[qi].opts[a][3];} });
+  const r = (s>=h&&s>=p) ? results[0] : (h>=p) ? results[1] : results[2];
+  const tot = Math.max(s+h+p, 1);
+  const seg = (n, t) => `<div class="score-seg${r.type===t?" "+t:""}" style="flex:${Math.max(n,1)}"></div>`;
+  document.getElementById("pbar").style.width = "100%";
+  body.innerHTML = `
+    <div class="result-icon">${r.icon}</div>
+    <div class="result-title">${r.title}</div>
+    <div class="score-bar">${seg(s,"s")}${seg(h,"h")}${seg(p,"p")}</div>
+    <div class="score-legend">
+      <span style="color:#1D9E75">● Сам: ${s}</span>
+      <span style="color:#EF9F27">● Гибрид: ${h}</span>
+      <span style="color:#378ADD">● Прораб: ${p}</span>
+    </div>
+    <div class="result-desc">${r.desc}</div>
+    <div class="result-tip">${r.tip}</div>
+    <div class="insta-block">Больше лайфхаков, честных советов и проектных решений по ремонту — в Instagram: <a href="https://instagram.com/designproject_ks" target="_blank">@designproject_ks</a>. Подписывайся, чтобы не упустить полезное!</div>
+    <button class="restart-btn" onclick="restart()">Пройти тест заново</button>
+  `;
+}
+
+function restart() { answers = new Array(questions.length).fill(null); cur=0; render(); }
+render();
+</script>
+</body>
+</html>
