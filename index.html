@@ -12,7 +12,7 @@
   /* Header */
   .header { background: linear-gradient(135deg, #FDF8EF, #FFF8E7); border-radius: 16px; padding: 1.5rem; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(201,168,76,0.15); border: 1.5px solid #F0DFA0; }
   .header-top { display: flex; align-items: center; gap: 14px; }
-  .logo { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2.5px solid #C9A84C; box-shadow: 0 2px 8px rgba(201,168,76,0.3); }
+  .logo { width: 72px; height: 72px; min-width: 72px; border-radius: 50%; object-fit: cover; border: 2.5px solid #C9A84C; box-shadow: 0 2px 8px rgba(201,168,76,0.3); margin: -8px 0; }
   .header h1 { font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; color: #1a1a1a; }
   .header p { font-size: 12px; color: #8a7340; line-height: 1.5; font-weight: 500; }
 
@@ -67,10 +67,10 @@
   .result-tip { font-size: 13px; color: #555; border-left: 3px solid #378ADD; padding: 8px 12px; background: #F0F7FF; border-radius: 0 8px 8px 0; line-height: 1.6; margin-bottom: 18px; }
 
   /* Insta block in result */
-  .insta-block { background: #FDF8EF; border: 1.5px solid #F0DFA0; border-radius: 12px; padding: 14px 16px; text-align: center; }
-  .insta-block-icon { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+  .insta-block { background: #FDF8EF; border: 1.5px solid #F0DFA0; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+  .insta-block-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); display: flex; align-items: center; justify-content: center; order: 2; }
   .insta-block-icon svg { width: 20px; height: 20px; fill: #fff; }
-  .insta-block-text { font-size: 13px; color: #555; line-height: 1.7; }
+  .insta-block-text { font-size: 13px; color: #555; line-height: 1.7; order: 1; }
   .insta-block-text a { color: #ee2a7b; font-weight: 600; text-decoration: none; }
   .insta-block-text a:hover { text-decoration: underline; }
 
