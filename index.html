@@ -12,7 +12,7 @@
   /* Header */
   .header { background: linear-gradient(135deg, #FDF8EF, #FFF8E7); border-radius: 16px; padding: 1.5rem; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(201,168,76,0.15); border: 1.5px solid #F0DFA0; }
   .header-top { display: flex; align-items: center; gap: 14px; }
-  .logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover;   border: 2.5px solid #C9A84C; box-shadow: 0 2px 8px rgba(201,168,76,0.3); }
+  .logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2.5px solid #C9A84C; box-shadow: 0 2px 8px rgba(201,168,76,0.3); }
   .header h1 { font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; color: #1a1a1a; }
   .header p { font-size: 12px; color: #8a7340; line-height: 1.5; font-weight: 500; }
 
@@ -20,34 +20,30 @@
   .progress-wrap { height: 5px; background: #E0DBD4; border-radius: 5px; margin-bottom: 12px; }
   .progress-bar { height: 5px; border-radius: 5px; background: linear-gradient(90deg, #378ADD, #5BA8F5); transition: width 0.4s ease; }
 
+  /* Intro card */
+  .intro-card { background: #fff; border-radius: 16px; padding: 1.75rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center; }
+  .intro-icon { font-size: 48px; margin-bottom: 12px; }
+  .intro-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #111; }
+  .intro-desc { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 20px; }
+  .insta-cta { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); border-radius: 12px; padding: 13px 18px; margin-bottom: 12px; text-decoration: none; }
+  .insta-cta svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+  .insta-cta span { color: #fff; font-size: 15px; font-weight: 600; }
+  .intro-already { display: block; width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #EEEBE6; background: #FAFAF9; color: #555; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.15s; }
+  .intro-already:hover { background: #F0EDE8; }
+
   /* Question card */
   .q-card { background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .q-num { font-size: 11px; font-weight: 600; color: #378ADD; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
   .q-text { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 16px; color: #111; }
 
   /* Options */
-  .opt-btn {
-    display: flex; align-items: center; gap: 12px;
-    width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px;
-    border-radius: 12px; border: 1.5px solid #EEEBE6;
-    background: #FAFAF9; color: #333; cursor: pointer;
-    font-size: 14px; line-height: 1.5;
-    transition: all 0.15s ease;
-  }
+  .opt-btn { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px; border-radius: 12px; border: 1.5px solid #EEEBE6; background: #FAFAF9; color: #333; cursor: pointer; font-size: 14px; line-height: 1.5; transition: all 0.15s ease; }
   .opt-btn:hover { background: #F5F2EE; border-color: #D8D2C8; }
   .opt-btn.selected { border-color: #378ADD; background: #EBF4FC; color: #0C447C; }
   .opt-btn.selected .opt-dot { background: #378ADD; border-color: #378ADD; }
   .opt-btn.selected .opt-dot::after { opacity: 1; }
-  .opt-dot {
-    flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
-    border: 2px solid #CCC; background: #fff;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-  }
-  .opt-dot::after {
-    content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: #fff; opacity: 0; transition: opacity 0.15s;
-  }
+  .opt-dot { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #CCC; background: #fff; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .opt-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; opacity: 0; transition: opacity 0.15s; }
 
   /* Nav */
   .nav-row { display: flex; gap: 10px; margin-top: 16px; }
@@ -69,9 +65,15 @@
   .score-legend { display: flex; gap: 16px; font-size: 12px; color: #999; margin-bottom: 18px; }
   .result-desc { font-size: 14px; color: #444; line-height: 1.8; margin-bottom: 14px; }
   .result-tip { font-size: 13px; color: #555; border-left: 3px solid #378ADD; padding: 8px 12px; background: #F0F7FF; border-radius: 0 8px 8px 0; line-height: 1.6; margin-bottom: 18px; }
-  .insta-block { background: #F0EDE8; border-radius: 12px; padding: 14px 16px; font-size: 13px; color: #666; line-height: 1.7; }
-  .insta-block a { color: #378ADD; font-weight: 600; text-decoration: none; }
-  .insta-block a:hover { text-decoration: underline; }
+
+  /* Insta block in result */
+  .insta-block { background: #FDF8EF; border: 1.5px solid #F0DFA0; border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
+  .insta-block-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); display: flex; align-items: center; justify-content: center; }
+  .insta-block-icon svg { width: 20px; height: 20px; fill: #fff; }
+  .insta-block-text { font-size: 13px; color: #555; line-height: 1.7; }
+  .insta-block-text a { color: #ee2a7b; font-weight: 600; text-decoration: none; }
+  .insta-block-text a:hover { text-decoration: underline; }
+
   .restart-btn { display: block; width: 100%; padding: 13px; border-radius: 12px; border: 1.5px solid #EEEBE6; background: #fff; color: #555; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
   .restart-btn:hover { background: #F5F2EE; }
 </style>
@@ -92,6 +94,8 @@
 </div>
 
 <script>
+const igSVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.333 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.333 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.333-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.333-2.633 1.308-3.608C4.516 2.496 5.783 2.225 7.149 2.163 8.415 2.105 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948 0-3.259-.014-3.668-.072-4.948-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>`;
+
 const questions = [
   { q: "Какой у вас бюджет на ремонт?", opts: [
     ["Минимальный — хочу сэкономить на всём: и на работах, и на материалах", 2,0,0],
@@ -193,8 +197,32 @@ const results = [
 
 let answers = new Array(questions.length).fill(null);
 let cur = 0;
+let started = false;
+
+function showIntro() {
+  const body = document.getElementById("quiz-body");
+  document.getElementById("pbar").style.width = "0%";
+  body.innerHTML = `
+    <div class="intro-card">
+      <div class="intro-icon">👋</div>
+      <div class="intro-title">Прежде чем начать...</div>
+      <div class="intro-desc">Здесь я делюсь честными лайфхаками про ремонт и дизайн интерьера. Подпишись, чтобы не пропустить полезное — и начинай тест!</div>
+      <a class="insta-cta" href="https://instagram.com/designproject_ks" target="_blank">
+        ${igSVG}
+        <span>Подписаться на @designproject_ks</span>
+      </a>
+      <button class="intro-already" onclick="startQuiz()">Я уже подписан — начать тест →</button>
+    </div>
+  `;
+}
+
+function startQuiz() {
+  started = true;
+  render();
+}
 
 function render() {
+  if (!started) { showIntro(); return; }
   const body = document.getElementById("quiz-body");
   document.getElementById("pbar").style.width = (cur / questions.length * 100) + "%";
   if (cur >= questions.length) { showResult(body); return; }
@@ -204,9 +232,7 @@ function render() {
     <div class="q-text">${q.q}</div>`;
   q.opts.forEach((o, i) => {
     const sel = answers[cur] === i ? " selected" : "";
-    html += `<button class="opt-btn${sel}" onclick="pick(${i})">
-      <span class="opt-dot"></span>${o[0]}
-    </button>`;
+    html += `<button class="opt-btn${sel}" onclick="pick(${i})"><span class="opt-dot"></span>${o[0]}</button>`;
   });
   html += `<div class="nav-row">
     <button class="nav-btn" onclick="go(-1)"${cur===0?" disabled":""}>← Назад</button>
@@ -236,14 +262,17 @@ function showResult(body) {
       </div>
       <div class="result-desc">${r.desc}</div>
       <div class="result-tip">${r.tip}</div>
-      <div class="insta-block">Больше лайфхаков, честных советов и проектных решений по ремонту — в Instagram: <a href="https://instagram.com/designproject_ks" target="_blank">@designproject_ks</a>. Подписывайся, чтобы не упустить полезное!</div>
+      <div class="insta-block">
+        <div class="insta-block-icon">${igSVG}</div>
+        <div class="insta-block-text">Больше лайфхаков, честных советов и проектных решений по ремонту — в Instagram: <a href="https://instagram.com/designproject_ks" target="_blank">@designproject_ks</a>. Подписывайся, чтобы не упустить полезное!</div>
+      </div>
     </div>
     <button class="restart-btn" onclick="restart()">Пройти тест заново</button>
   `;
 }
 
-function restart() { answers = new Array(questions.length).fill(null); cur=0; render(); }
-render();
+function restart() { answers = new Array(questions.length).fill(null); cur=0; started=false; showIntro(); }
+showIntro();
 </script>
 </body>
 </html>
